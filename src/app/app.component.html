@@ -1,0 +1,66 @@
+<div class="container">
+
+  <div>
+    <h1>DISPLAY ORDERS</h1>
+    <div class="csv-file-chooser-section">
+      <input type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
+        accept=".csv" />
+    </div>
+  </div>
+
+  <div class="csv-result-table">
+
+    <div class="card text-center mt-2 mb-2" style="max-width: 80%; margin: 0 auto;" *ngFor="let order of orders">
+      <div class="card-header">
+        <div class="row">
+          <div class="col">
+            <h4>Order #: {{order[0]}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3" style="max-width: 30%; margin: 0 auto;">
+          <div class="col"><span style="font-weight: bold;">Name:</span> {{order[1][0]["Shipping Name"]}}</div>
+          <div class="col"><span style="font-weight: bold;">Date Ordered:</span> {{order[1][0]["Paid at"] | date}}</div>
+          <div class="col mt-5">
+            <h6 style="font-weight: bold;">Shipping Address:</h6>
+            {{order[1][0]["Shipping Address1"]}}
+            {{order[1][0]["Shipping Address2"]}}
+            {{order[1][0]["Shipping City"]}}, {{order[1][0]["Shipping Province"]}} {{order[1][0]["Shipping Zip"]}}
+          </div>
+        </div>
+        <div class="col-9">
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">QTY</th>
+                <th scope="col">ITEM</th>
+                <th scope="col">Modification</th>
+                <th scope="col">Customization</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order[1]">
+                <th scope="row">{{item["Lineitem quantity"]}}</th>
+                <td>{{item["Lineitem name"]}}</td>
+                <td>{{item["Lineitem variant"]}}</td>
+                <td>{{item["Checkout Form: Note / Additional Info"]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div>
+          <div class="row" *ngFor="let item of order[1]">
+            <div class="w-100"></div>
+            <div class="col">{{item["Lineitem name"]}}</div>
+            <div class="col">col</div>
+          </div>
+        </div> -->
+      </div>
+      <div class="card-footer text-muted">
+      </div>
+    </div> <!-- END OF CARD DIV -->
+
+  </div> <!-- END OF Result Table -->
+
+</div> <!-- END OF CONTAINER -->
